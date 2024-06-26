@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title style="color: rgb(255, 255, 255);">Sign Language Detection</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color:rgb(104, 154, 177);
+        }
+        .container {
+            text-align: center;
+        }
+        #sign-container {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            background-color:rgb(97, 198, 198);
+            color: #000000;
+            padding: 10px;
+            border-radius: 5px;
+            width: 640px;
+            margin: auto;
+        }
+        #video-container {
+            margin-top: 20px;
+            width: 640px;
+            height: 480px;
+            border: 2px solid #333;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body style="background-color:rgb(169, 206, 214);">
+    <div class="container">
+        <h1>Sign Language Detection</h1>
+        <div id="video-container">
+            <img id="video-feed" src="{{ url_for('video_feed') }}" width="640" height="480" style="object-fit: cover;">
+        </div>
+        <div id="sign-container">
+            Predicted Sign: <span id="predicted-sign">...   </span>
+        </div>
+    </div>
+
+    <script>
+        const video = document.getElementById('video-feed');
+        const signContainer = document.getElementById('predicted-sign');
+
+        video.onload = () => {
+            setInterval(() => {
+                video.src = "{{ url_for('video_feed') }}";
+            }, 1000);  // Update every second
+
+            video.addEventListener('load', () => {
+                signContainer.innerText = "Loading...";
+            });
+
+            video.addEventListener('error', () => {
+                signContainer.innerText = "Error loading video.";
+            });
+
+            video.addEventListener('click', () => {
+                video.play();
+            });
+
+            video.play();
+        };
+
+        const socket = new WebSocket(`ws://${window.location.host}/ws`);
+        socket.addEventListener('message', event => {
+            signContainer.innerText = event.data;
+        });
+    </script>
+</body>
+</html>
