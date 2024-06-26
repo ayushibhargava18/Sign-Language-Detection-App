@@ -34,7 +34,6 @@ MarkupSafe==2.1.5
 matplotlib==3.7.5
 mediapipe
 ml-dtypes==0.2.0
-numpy~=1.23.3
 oauthlib==3.2.2
 opencv-contrib-python==4.10.0.84
 opencv-python==4.10.0.84
