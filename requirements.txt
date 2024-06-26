@@ -31,7 +31,7 @@ libclang==18.1.1
 Markdown==3.6
 MarkupSafe==2.1.5
 matplotlib==3.7.5
-mediapipe==0.10.14
+mediapipe
 ml-dtypes==0.2.0
 numpy==1.24.3
 oauthlib==3.2.2
