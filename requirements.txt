@@ -1,6 +1,6 @@
 Flask==3.0.2
 opencv-python==4.9.0.80
-numpy==1.26.4
+numpy==1.24.3
 tensorflow==2.13.0
 mediapipe==0.10.9
 attrs==23.2.0
